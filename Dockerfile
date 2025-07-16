@@ -1,4 +1,4 @@
-FROM rust:1.88.0@sha256:1928f85f204effc91fddc53875afd042b651552fde6ee11acaafde641942dd70 AS backend
+FROM rust:1.88.0@sha256:5771a3cc2081935c59ac52b92d49c9e164d4fed92c9f6420aa8cc50364aead6e AS backend
 
 # Setup dependencies and run a dummy build ahead
 # of copying in our code. This speeds up re-builds
@@ -19,12 +19,12 @@ WORKDIR /app/backend
 RUN cargo build --release
 
 # Build the sqlx binary, used to apply database migrations.
-FROM rust:1.88.0@sha256:1928f85f204effc91fddc53875afd042b651552fde6ee11acaafde641942dd70 AS sqlx
+FROM rust:1.88.0@sha256:5771a3cc2081935c59ac52b92d49c9e164d4fed92c9f6420aa8cc50364aead6e AS sqlx
 WORKDIR /app
 COPY rust-toolchain.toml ./
 RUN cargo install sqlx-cli@=0.8.6 --locked --no-default-features --features native-tls,postgres --root ./
 
-FROM node:24.2.0@sha256:d1db2ecd11f417ab2ff4fef891b4d27194c367d101f9b9cd546a26e424e93d31 AS frontend
+FROM node:24.4.0@sha256:e7db48bc35ee8d2e8d1511dfe779d78076966bd101ab074ea2858da8d59efb7f AS frontend
 ENV PNPM_HOME="/pnpm"
 ENV PATH="$PNPM_HOME:$PATH"
 RUN corepack enable
