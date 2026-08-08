@@ -51,7 +51,7 @@
     "lib0": "0.2.109",
     "@lucide/svelte": "0.522.0",
     "marked": "15.0.12",
-    "mermaid": "11.7.0",
+    "mermaid": "11.16.1",
     "mockdate": "3.0.5",
     "mode-watcher": "1.0.8",
     "postcss": "8.5.6",
